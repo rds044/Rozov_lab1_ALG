@@ -51,13 +51,22 @@ int proverka_na_interval(int a, int b) // Проверка на число в и
         }
         else
         {
-            cout << "\n Incorrect input. Try again. Enter number from [" << a << "] till [" << b << "]: ";
+            cout << "\n The data is not correct, enter from  [" << a << "] to [" << b << "]: ";
             cin.clear();
             cin.ignore(512 , '\n');
         }
     } while (1);
 }
 
+// Функции вывода информации
+void truba_show(const truba& pipes) // Вызов меню трубы
+{ if (pipes.diametr)
+    {
+        cout << "\n Pipeline Parameters" << endl;
+        cout << " Lenth of the pipe: " << pipes.lenth << endl;
+        cout << " Diametr of Pipe: " << pipes.diametr << endl;
+        cout << " Pipeline under repair ?: " << pipes.remont << endl;
+    }
 int main()
 {
    
