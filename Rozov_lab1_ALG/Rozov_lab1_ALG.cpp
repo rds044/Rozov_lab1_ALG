@@ -129,9 +129,7 @@ void new_pipe(truba& pipes) // Новая труба
             cout << "\n Canceled " << endl;;
             return;
         }
-    }
-
-
+    }   
     cout << "\n Enter the length of the pipeline in meters: ";
     pipes.lenth = check_on_positive();
     cout << "Enter the diameter of the pipeline in millimeters: ";
@@ -181,6 +179,49 @@ void new_CS(compressor& added_compressors) // Новая Компрессорн�
     added_compressors.effectivnost = proverka_na_interval(0, 100);
 }
 
+
+// Фукнции редактирования информации
+void edit_pipes(truba& pipes) // Редактирование трубы
+{
+    if (pipes.diametr == 0)
+    {
+        cout << "\n No information about compression stations " << endl;
+        return;
+    }
+
+    cout << "\n Old repair status: " << pipes.remont << endl;;
+    cout << " Enter the new repair status: ";
+    pipes.remont = check_vvod();
+
+    cout << "\n OK" << endl;
+}
+
+void edit_cs(compressor& added_compressors) // Редактирование КС
+{
+    if (added_compressors.workshops_all == 0)
+    {
+        std::cout << "\n The compressor station's information hasn't found " << endl;
+        return;
+    }
+
+    cout << "\n Old number ALL workshops: " << added_compressors.chex_rab << endl;
+    cout << " Old number WORKING workshops: " << added_compressors.chex_rab << endl;
+
+    do {
+        cout << " Enter the new number of the WORKING workshops: ";
+        added_compressors.chex_rab = check_vvod();
+
+        if (added_compressors.chex_rab > added_compressors.chex_kolvo)
+        {
+            cout << "\n There cannot be more employees than their total number. Try again \n" << endl;
+        }
+        else
+        {
+            break;
+        }
+    } while (1);
+    cout << "\n Ok" << endl;
+}
 
     int main();
 { 
