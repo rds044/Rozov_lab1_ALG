@@ -58,6 +58,27 @@ int proverka_na_interval(int a, int b) // Проверка на число в и
     } while (1);
 }
 
+bool check_on_positive()// Чек на положительное число
+{
+    int plus
+   do {
+       if ((cin >> plus) && (plus >= 0))
+       {
+           cin.ignore(512, '/n');
+           return(plus);
+       }
+       else
+       {
+           cout << "Enter a positive value. This is incorrect";
+           cin.clear();
+           cin.ignore(512, '\n');
+
+       }
+    while (1);
+   }
+
+}
+
 // Функции вывода информации
 void truba_show(const truba& pipes) // Вызов меню трубы
 { if (pipes.diametr)
@@ -92,7 +113,7 @@ void show_compressor(const compressor& added_compressors)
 //Функции добавления информации 
 void new_pipe(truba &pipes) // Новая труба
 {
-    if (pipes.diameter)
+    if (pipes.diametr)
     {
         cout << "\n We already have a pipe, do you want to make a new one and remove the old one?" << endl;
         cout << " Continue Yes 1 / No 0 ? ";
@@ -114,9 +135,9 @@ void new_pipe(truba &pipes) // Новая труба
     pipes.diametr = checker();
 
     cout << " Enter pipeline's status (0 working, 1 in the repair): ";
-    pipes.remont = checker_bool();
+    pipes.remont = check_vvod();
 
-int main()
+    int main();
 { 
     truba_show( truba);
 }
