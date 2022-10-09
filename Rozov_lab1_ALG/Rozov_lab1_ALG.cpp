@@ -15,7 +15,7 @@ struct truba  // Задаем характеристики трубопрово�
 };
 
 struct compressor // Компрессорная установка 
-   {    string name_cs; // Имя компрессора 
+   {string name_cs; // Имя компрессора 
 int chex_kolvo = 0;// Количество цехов всего
 int chex_rab = 0;// Количество рабочих цехов
 double effectivnost = 0;// Коэффициент эффективности в %
@@ -134,13 +134,54 @@ void new_pipe(truba& pipes) // Новая труба
 
     cout << "\n Enter the length of the pipeline in meters: ";
     pipes.lenth = check_on_positive();
-
     cout << "Enter the diameter of the pipeline in millimeters: ";
     pipes.diametr = check_on_positive();
-
     cout << " Enter pipeline's status (0 working, 1 in the repair): ";
     pipes.remont = check_vvod();
 }
+
+void new_CS(compressor& added_compressors) // Новая Компрессорная станция
+{
+    if (added_compressors.chex_kolvo)
+    {
+        cout << "\n We already have a compressor station, do you want to make a new one and remove the old one?" << endl;
+        cout << " Continue Yes 1 / No 0 ? ";
+        if (check_vvod())
+        {
+            cout << "\n Rewriting " << endl;;
+        }
+        else
+        {
+            cout << "\n Canceled " << endl;;
+            return;
+        }
+
+    }
+    cout << "\n Enter the compressor station's name: ";
+    cin.ignore();
+    getline(cin, added_compressors.name_cs);
+
+    do {
+        cout << " Enter how many stations there are in total: ";
+        added_compressors.chex_kolvo = check_on_positive();
+
+        cout << " Enter how many stations are running in total: ";
+        added_compressors.chex_rab = check_on_positive();
+        if (added_compressors.chex_rab > added_compressors.chex_kolvo)
+        {
+            cout << "\n There cannot be more employees than their total number. Try again \n" << endl;
+        }
+        else
+        {
+            break;
+        }
+    } while (1);
+
+    cout << " Enter the efficiency of the compressor station: ";
+    added_compressors.effectivnost = proverka_na_interval(0, 100);
+}
+
+
     int main();
 { 
     
