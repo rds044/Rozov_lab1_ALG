@@ -16,8 +16,8 @@ struct truba  // Задаем характеристики трубопрово�
 
 struct compressor // Компрессорная установка 
    {    string name_cs; // Имя компрессора 
-int zhex_kolvo = 0;// Количество цехов всего
-int zhex_rab = 0;// Количество рабочих цехов
+int chex_kolvo = 0;// Количество цехов всего
+int chex_rab = 0;// Количество рабочих цехов
 double effectivnost = 0;// Коэффициент эффективности в %
 };
 // Проверка введенных данных 
@@ -67,8 +67,15 @@ void truba_show(const truba& pipes) // Вызов меню трубы
         cout << " Diametr of Pipe: " << pipes.diametr << endl;
         cout << " Pipeline under repair ?: " << pipes.remont << endl;
     }
-int main()
+    else
 {
-   
+    cout << "\n There are no pipes" << endl;
+}
+}
+
+
+int main()
+{ 
+    truba_show( truba);
 }
 
