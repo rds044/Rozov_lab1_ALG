@@ -60,7 +60,7 @@ int proverka_na_interval(int a, int b) // Проверка на число в и
 
 bool check_on_positive()// Чек на положительное число
 {
-    int plus
+    int plus;
    do {
        if ((cin >> plus) && (plus >= 0))
        {
@@ -74,20 +74,22 @@ bool check_on_positive()// Чек на положительное число
            cin.ignore(512, '\n');
 
        }
-    while (1);
+   
    }
-
+ while (1);
 }
 
 // Функции вывода информации
 void truba_show(const truba& pipes) // Вызов меню трубы
-{ if (pipes.diametr)
+{
+    if (pipes.diametr)
     {
         cout << "\n Pipeline Parameters" << endl;
         cout << " Lenth of the pipe: " << pipes.lenth << endl;
         cout << " Diametr of Pipe: " << pipes.diametr << endl;
         cout << " Pipeline under repair ?: " << pipes.remont << endl;
     }
+    
     else
 {
     cout << "\n There are no pipes" << endl;
@@ -102,16 +104,17 @@ void show_compressor(const compressor& added_compressors)
         cout << "Number of workshops in total: " << added_compressors.chex_kolvo << endl;
         cout << "Number of working workshops: " << added_compressors.chex_rab << endl;
         cout << "Shop efficiency: " << added_compressors.effectivnost << endl;
+    }
     else
     {
         cout << "\n There are no workshops at the moment, add them " << endl;
     }
     }
-}
+
 
 
 //Функции добавления информации 
-void new_pipe(truba &pipes) // Новая труба
+void new_pipe(truba& pipes) // Новая труба
 {
     if (pipes.diametr)
     {
@@ -128,17 +131,18 @@ void new_pipe(truba &pipes) // Новая труба
         }
     }
 
+
     cout << "\n Enter the length of the pipeline in meters: ";
-    pipes.lenth = check();
+    pipes.lenth = check_on_positive();
 
     cout << "Enter the diameter of the pipeline in millimeters: ";
-    pipes.diametr = checker();
+    pipes.diametr = check_on_positive();
 
     cout << " Enter pipeline's status (0 working, 1 in the repair): ";
     pipes.remont = check_vvod();
-
+}
     int main();
 { 
-    truba_show( truba);
+    
 }
 
