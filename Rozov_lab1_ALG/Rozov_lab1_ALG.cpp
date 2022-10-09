@@ -72,7 +72,21 @@ void truba_show(const truba& pipes) // Вызов меню трубы
     cout << "\n There are no pipes" << endl;
 }
 }
-
+void show_compressor(const compressor& added_compressors)
+{
+    if (added_compressors.chex_kolvo)
+    {
+        cout << "/n The compressor station has these characteristics";
+        cout << "Compressor station name: " << added_compressors.name_cs << endl;
+        cout << "Number of workshops in total: " << added_compressors.chex_kolvo << endl;
+        cout << "Number of working workshops: " << added_compressors.chex_rab << endl;
+        cout << "Shop efficiency: " << added_compressors.effectivnost << endl;
+    else
+    {
+        cout << "\n There are no workshops at the moment, add them" << endl;
+    }
+    }
+}
 
 int main()
 { 
