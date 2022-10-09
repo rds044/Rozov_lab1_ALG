@@ -83,10 +83,38 @@ void show_compressor(const compressor& added_compressors)
         cout << "Shop efficiency: " << added_compressors.effectivnost << endl;
     else
     {
-        cout << "\n There are no workshops at the moment, add them" << endl;
+        cout << "\n There are no workshops at the moment, add them " << endl;
     }
     }
 }
+
+
+//Функции добавления информации 
+void new_pipe(truba &pipes) // Новая труба
+{
+    if (pipes.diameter)
+    {
+        cout << "\n We already have a pipe, do you want to make a new one and remove the old one?" << endl;
+        cout << " Continue Yes 1 / No 0 ? ";
+        if (check_vvod())
+        {
+            cout << "\n Rewriting " << endl;;
+        }
+        else
+        {
+            cout << "\n Canceled " << endl;;
+            return;
+        }
+    }
+
+    cout << "\n Enter the length of the pipeline in meters: ";
+    pipes.lenth = check();
+
+    cout << "Enter the diameter of the pipeline in millimeters: ";
+    pipes.diametr = checker();
+
+    cout << " Enter pipeline's status (0 working, 1 in the repair): ";
+    pipes.remont = checker_bool();
 
 int main()
 { 
