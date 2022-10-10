@@ -80,7 +80,7 @@ bool check_on_positive()// Чек на положительное число
 }
 
 // Функции вывода информации
-void truba_show(const truba& pipes) // Вызов меню трубы
+void truba_show(const truba &pipes) // Вызов меню трубы
 {
     if (pipes.diametr)
     {
@@ -95,7 +95,7 @@ void truba_show(const truba& pipes) // Вызов меню трубы
     cout << "\n There are no pipes" << endl;
 }
 }
-void show_compressor(const compressor& added_compressors)
+void show_compressor(const compressor &added_compressors)
 {
     if (added_compressors.chex_kolvo)
     {
@@ -114,7 +114,7 @@ void show_compressor(const compressor& added_compressors)
 
 
 //Функции добавления информации 
-void new_pipe(truba& pipes) // Новая труба
+void new_pipe(truba &pipes) // Новая труба
 {
     if (pipes.diametr)
     {
@@ -138,7 +138,7 @@ void new_pipe(truba& pipes) // Новая труба
     pipes.remont = check_vvod();
 }
 
-void new_CS(compressor& added_compressors) // Новая Компрессорная станция
+void new_CS(compressor &added_compressors) // Новая Компрессорная станция
 {
     if (added_compressors.chex_kolvo)
     {
@@ -181,7 +181,7 @@ void new_CS(compressor& added_compressors) // Новая Компрессорн�
 
 
 // Фукнции редактирования информации
-void edit_pipes(truba& pipes) // Редактирование трубы
+void edit_pipes(truba &pipes) // Редактирование трубы
 {
     if (pipes.diametr == 0)
     {
@@ -196,9 +196,9 @@ void edit_pipes(truba& pipes) // Редактирование трубы
     cout << "\n OK" << endl;
 }
 
-void edit_cs(compressor& added_compressors) // Редактирование КС
+void edit_cs(compressor &added_compressors) // Редактирование КС
 {
-    if (added_compressors.workshops_all == 0)
+    if (added_compressors.chex_kolvo == 0)
     {
         std::cout << "\n The compressor station's information hasn't found " << endl;
         return;
@@ -223,8 +223,149 @@ void edit_cs(compressor& added_compressors) // Редактирование КС
     cout << "\n Ok" << endl;
 }
 
-    int main();
-{ 
-    
+void save_data(truba &pipes, compressor &added_compressors)
+{
+    if (pipes.diametr || added_compressors.chex_kolvo)
+    {
+        cout << "\n Save the data? ? 1 Yes / 0 No: ";
+        ofstream outing("DataFile.txt",
+            check_vvod() ? ios::out :
+            ios::app);
+
+        if (outing.is_open())
+        {
+            if (pipes.diametr)
+            {
+                outing << 1 << endl;
+                outing << pipes.lenth << endl;
+                outing << pipes.diametr << endl;
+                outing << pipes.remont << endl;
+                outing << endl;
+            }
+
+            if (added_compressors.chex_kolvo)
+            {
+                outing << 2 << endl;
+                outing << added_compressors.name_cs << endl;
+                outing << added_compressors.chex_kolvo << endl;
+                outing << added_compressors.chex_rab << endl;
+                outing << endl;
+            }
+            outing.close();
+        }
+        cout << "\n The data has been saved" << endl;
+    }
+    else
+    {
+        cout << "\n Error when saving data," << endl;
+    }
 }
+
+void load_data(truba &pipes,compressor &added_compressors)
+{
+    ifstream ining("DataFile.txt");
+    int type;
+    if (ining.is_open())
+    {
+        while (ining >> type) // Считывание данных из файла до конца файла
+        {
+            if (type == 1)
+            {
+                ining >> pipes.lenth;
+                ining >> pipes.diametr;
+                ining >> pipes.remont;
+            }
+            if (type == 2)
+            {
+                ining.ignore();
+                getline(ining,added_compressors.name_cs);
+                ining >> added_compressors.chex_kolvo;
+                ining >> added_compressors.chex_rab;
+                ining >> added_compressors.effectivnost;
+            }
+            ining.clear();
+            ining.ignore(1024, '\n');
+        }
+        if ((pipes.diametr) || (added_compressors.chex_kolvo))
+        {
+            cout << "\n Data have been download" << endl;
+        }
+        else
+        {
+            cout << "\n Nothing to download" << endl;
+        }
+    }
+    ining.close();
+}
+
+int main();
+{
+        int menu = 1; // Переменная, хранящая команду пользователя 
+        cout << "Welcome to Gas Transporation Systems\nPlease enter a command.\n\n";
+
+        // Реализация комманд
+        pipeline menu_pipe; // Cтруктура трубы
+        compressor menu_cs; // Cтруктура КС
+
+        do 
+        { // Цикл для считывания комманд пользователя
+            switch (Menu) 
+            { // Выбор опций в главном меню
+            case 0:
+            {
+                return(0);
+            }
+            case 1:
+            {
+                cout << "\n 1 Help \n\n 2 Show the Objects \n\n 3 Add Pipeline \n\n 4 Add Compressor \n\n 5 Edit Repair Status of Pipeline \n\n 6 Edit Number of Working Worhshops \n\n";
+                cout << " 7 Save \n\n 8 Load \n\n 0 Exit";
+                break;
+            }
+            case 2: 
+            { // Показать все объекты
+                truba_show(menu_pipe);
+                show_compressor(menu_cs);
+                break;
+            }
+            case 3: 
+            { // Добавить трубу
+                new_pipe(menu_pipe);
+                break;
+            }
+            case 4:
+            { // Добавить кс
+                new_CS(menu_cs);
+                break;
+            }
+            case 5: 
+            { // Редактировать  трубу
+                edit_pipes(menu_pipe);
+                break;
+            }
+
+            case 6:
+            { // Редактировать КС
+                edit_cs(menu_cs);
+                break;
+            }
+            case 7: 
+            { // Сохранение данных в файл
+                save_data(menu_pipe, menu_cs);
+                break;
+            }
+            case 8: 
+            { // Чтение данных из файла
+                load_data(menu_pipe, menu_cs);
+                break;
+            }
+            default:
+            {
+                break;
+            }
+            }
+            cout << "\n Main Menu >> ";
+            menu = proverka_na_interval(0, 8);
+        } while (1);
+        cout << " Good bue.\n\n\n";
+    }
 
